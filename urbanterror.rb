@@ -39,7 +39,7 @@ class UrbanTerror
     result.each do |player|
       player = player.split(" ", 3)
       p = Hash.new
-      p['name'] = player[2].gsub(/^"/,'').gsub(/"$/, '')
+      p['name'] = player[2][1..-2]
       p['ping'] = player[1].to_i
       p['score'] = player[0].to_i
       players << p
