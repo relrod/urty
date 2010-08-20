@@ -47,7 +47,7 @@ end
 
 if options.has_key? :gear
   gear = options[:gear].split(',')
-  gear_i = server.gearCalc gear
+  gear_i = UrbanTerror.gearCalc gear
   server.rcon "set g_gear #{gear_i}"
   puts "Gear is now set to #{gear_i}"
 end
