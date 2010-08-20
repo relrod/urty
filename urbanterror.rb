@@ -54,3 +54,10 @@ class UrbanTerror
     players
   end
 end
+
+# TODO: Eventually this will be in UrbanTerror (the class)
+def gearCalc
+  # We basically have to determine what the JS in
+  # http://www.urbanterror.info/docs/texts/123/#2.2
+  # is doing.
+end
