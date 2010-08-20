@@ -12,8 +12,11 @@ OptionParser.new do |opts|
   opts.on('-h', '--hostname HOSTNAME', "Server Hostname or IP") { |r| options[:hostname] = r }
   opts.on('-p', '--port PORT', "Server Port") { |r| options[:port] = r }
   opts.on('-m', '--map MAP', "Full Map Name (including 'ut4_')") { |r| options[:map] = r }
+  opts.on('-S', '--status', "Print the current status of the server.") { |r| options[:status] = r }
 end.parse!  
 
+# Handle simple sanity checks first. If we're just printing stuff,
+# no use in creating an instance of UrbanTerror() for example.
 if not options.has_key? :hostname or not options.has_key? :rcon
   puts "--hostname and --rcon-password are required for the time being."
   puts "In a later release, these options will be able to have defaults assigned"
@@ -26,6 +29,20 @@ if options.has_key? :gearlist
   puts "none = knife only."
   puts "comma-separate a list (no spaces)."
   exit
+end
+
+# Alright, everything else is actually dealing with UrT.
+port = !options[:port].nil? ? options[:port] : 27960
+server = UrbanTerror.new(options[:hostname], port, options[:rcon])
+
+if options.has_key? :status
+  pp server.settings
+  exit
+end
+
+if options.has_key? :map
+  server.rcon "map #{options[:map]}"
+  puts "Map is now #{options[:map]}"
 end
 
 pp options
