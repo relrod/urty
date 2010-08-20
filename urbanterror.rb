@@ -41,17 +41,15 @@ class UrbanTerror
   # players() returns a list of hashes. Each hash contains
   # name, score, ping.
   def players
-    result = get("status").split("\n")[2..-1]
-    players = []
-    result.each do |player|
+    results = get("status").split("\n")[2..-1]
+    results.map do |player|
       player = player.split(" ", 3)
-      p = Hash.new
-      p['name'] = player[2][1..-2]
-      p['ping'] = player[1].to_i
-      p['score'] = player[0].to_i
-      players << p
+      {
+        name:  player[2][1..-2],
+        ping:  player[1].to_i,
+        score: player[0].to_i
+      }
     end
-    players
   end
   
   def self.gearCalc(gearArray)
