@@ -21,8 +21,8 @@ class UrbanTerror
     sendCommand("get#{command}")
   end
 
-  def getparts(command)
-    get(command).split("\n")
+  def getparts(command, i)
+    get(command).split("\n")[i]
   end
   
   def rcon(command)
@@ -34,14 +34,14 @@ class UrbanTerror
   # doing the same thing and just selecting one from the Hash, so
   # why not just let the user do server.settings['map'] or whatever.
   def settings
-    result = get("status").split("\n")[1].split("\\").reject{ |s| s.empty? }
+    result = getparts("status", 1).split("\\").reject{ |s| s.empty? }
     Hash[*result]
   end
   
   # players() returns a list of hashes. Each hash contains
   # name, score, ping.
   def players
-    results = get("status").split("\n")[2..-1]
+    results = getparts("status", 2..-1)
     results.map do |player|
       player = player.split(" ", 3)
       {
