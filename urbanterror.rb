@@ -24,10 +24,13 @@ class UrbanTerror
   def getparts(command)
     get(command).split("\n")
   end
+<<<<<<< HEAD
   
   def rcon(command)
     sendCommand("rcon #{@rcon} #{command}")
   end
+=======
+>>>>>>> 5ac24eb3f30206781be787561dad24400e6585fb
 
   # settings() returns a hash of settings => values.
   # We /were/ going to accept an optional setting arg, but it would be
@@ -53,4 +56,12 @@ class UrbanTerror
     end
     players
   end
+<<<<<<< HEAD
 end
+=======
+end
+
+server = UrbanTerror.new(ARGV[0])
+pp server.players
+p server.settings
+>>>>>>> 5ac24eb3f30206781be787561dad24400e6585fb
