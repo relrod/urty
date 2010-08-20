@@ -53,11 +53,38 @@ class UrbanTerror
     end
     players
   end
+  
+  def self.gearCalc(gearArray)
+    initial = 63
+    selected_i = 0
+    selected = []
+    gearMaster = {
+      :grenades => 1,
+      :snipers => 2,
+      :spas => 4,
+      :pistols => 8,
+      :autos => 16,
+      :negev => 32
+    }
+
+    gearArray.each do |w|
+      if gearMaster.has_key? w
+        selected << gearMaster[w]
+      end
+    end
+
+    selected_i = selected.inject(:+)
+    return initial - selected_i
+  end
 end
 
-# TODO: Eventually this will be in UrbanTerror (the class)
-def gearCalc
-  # We basically have to determine what the JS in
-  # http://www.urbanterror.info/docs/texts/123/#2.2
-  # is doing.
-end
+# TEST CASE:
+# server = UrbanTerror("elrod.me")
+puts UrbanTerror.gearCalc [:grenades, :spas, :pistols, :autos]
+
+
+
+
+
+
+
