@@ -45,9 +45,9 @@ class UrbanTerror
     results.map do |player|
       player = player.split(" ", 3)
       {
-        name:  player[2][1..-2],
-        ping:  player[1].to_i,
-        score: player[0].to_i
+        :name => player[2][1..-2],
+        :ping => player[1].to_i,
+        :score => player[0].to_i
       }
     end
   end
@@ -57,12 +57,12 @@ class UrbanTerror
     selected_i = 0
     selected = []
     gearMaster = {
-      :grenades => 1,
-      :snipers => 2,
-      :spas => 4,
-      :pistols => 8,
-      :autos => 16,
-      :negev => 32
+      'grenades' => 1,
+      'snipers'  => 2,
+      'spas'     => 4,
+      'pistols'  => 8,
+      'autos'    => 16,
+      'negev'    => 32
     }
 
     gearArray.each do |w|
@@ -78,7 +78,7 @@ end
 
 # TEST CASE:
 # server = UrbanTerror("elrod.me")
-puts UrbanTerror.gearCalc [:grenades, :spas, :pistols, :autos]
+puts UrbanTerror.gearCalc ['grenades', 'spas', 'pistols', 'autos']
 
 
 
