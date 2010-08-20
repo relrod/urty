@@ -34,7 +34,7 @@ class UrbanTerror
   # doing the same thing and just selecting one from the Hash, so
   # why not just let the user do server.settings['map'] or whatever.
   def settings
-    result = getparts("status", 1).split("\\").reject{ |s| s.empty? }
+    result = getparts("status", 1).split("\\").reject(&:empty?)
     Hash[*result]
   end
   
