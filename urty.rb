@@ -13,6 +13,7 @@ OptionParser.new do |opts|
   opts.on('-p', '--port PORT', "Server Port") { |r| options[:port] = r }
   opts.on('-m', '--map MAP', "Full Map Name (including 'ut4_')") { |r| options[:map] = r }
   opts.on('-S', '--status', "Print the current status of the server.") { |r| options[:status] = r }
+  opts.on('-P', '--players', "Print the current players on the server.") { |r| options[:players] = r }
 end.parse!  
 
 # Handle simple sanity checks first. If we're just printing stuff,
@@ -40,6 +41,11 @@ if options.has_key? :status
   exit
 end
 
+if options.has_key? :players
+  pp server.players
+  exit
+end
+
 if options.has_key? :map
   server.rcon "map #{options[:map]}"
   puts "Map is now #{options[:map]}"
@@ -50,6 +56,11 @@ if options.has_key? :gear
   gear_i = UrbanTerror.gearCalc gear
   server.rcon "set g_gear #{gear_i}"
   puts "Gear is now set to #{gear_i}"
+end
+
+if options.has_key? :gravity
+  server.rcon "set g_gravity #{options[:gravity]}"
+  puts "Gravity is now #{options[:gravity]}"
 end
 
 pp options
